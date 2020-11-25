@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Contact } from "./contact_list";
 
 function Left(props) {
-  console.log("user", props.user);
   return (
     <ul className="mt-2" style={{ paddingTop: "100px" }}>
       {props.user.map((data, id) => {
@@ -11,10 +9,10 @@ function Left(props) {
             class="card mt-3"
             style={{ width: "70%" }}
             onClick={() => {
-              props.display(id);
+              props.display(data["E-mail Address"]);
             }}
           >
-            {data.gender === "Male" ? (
+            {data.gender === "Male" || data.gender === "male" ? (
               <img
                 class="card-img-top"
                 src="https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg"
@@ -29,7 +27,9 @@ function Left(props) {
             )}
 
             <div class="card-body">
-              <h5 class="card-title">{data["First Name"]}</h5>
+              <h5 class="card-title" style={{ fontSize: "2vw" }}>
+                {data["First Name"]}
+              </h5>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">{data["Home Phone"]}</li>

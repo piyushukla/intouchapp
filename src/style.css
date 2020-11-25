@@ -1,0 +1,47 @@
+.leftside,
+.rightside {
+  height: 50vh;
+  width: 100%;
+}
+
+@media screen and (min-width: 701px) {
+  .leftside,
+  .rightside {
+    height: 100vh;
+  }
+  .leftside {
+    border: 2px solid #808080;
+  }
+  h1 {
+    position: fixed;
+  }
+  .details {
+    position: fixed;
+  }
+  .fixed-top {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .head {
+    height: 65vh;
+    overflow-y: scroll;
+    /* border: 2px solid blue; */
+  }
+  .fixed-top {
+    width: 100%;
+  }
+  h1 {
+    position: unset;
+  }
+  .details {
+    position: unset;
+  }
+  .rightside {
+    overflow-y: scroll;
+  }
+  .leftside {
+    border: none;
+  }
+}

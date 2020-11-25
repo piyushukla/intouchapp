@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../style.css";
 
 function Right({ data, update }) {
   const [flag, setFlag] = useState(true);
@@ -16,9 +17,8 @@ function Right({ data, update }) {
   useEffect(() => {
     setObj({ ...data });
   }, [data]);
-  console.log("right", obj);
+
   function change(e) {
-    console.log("name", e.target.value);
     setObj({
       ...obj,
       [e.target.name]: e.target.value,
@@ -29,7 +29,7 @@ function Right({ data, update }) {
       onChange={() => {
         setFlag(false);
       }}
-      style={{ position: "fixed" }}
+      className="details"
     >
       <div class="form-row">
         <div class="col-md-4 mb-3">
@@ -76,6 +76,7 @@ function Right({ data, update }) {
             </div>
             <input
               type="text"
+              disabled
               class="form-control"
               id="validationTooltipUsername"
               placeholder="Username"
@@ -180,6 +181,16 @@ function Right({ data, update }) {
         disabled={flag === true ? true : false}
         onClick={() => {
           update(obj);
+          setObj({
+            "First Name": "",
+            "Last Name": "",
+            "E-mail Address": "",
+            City: "",
+            Country: "",
+            Department: "",
+            "Home Phone": "",
+            gender: "",
+          });
         }}
       >
         Update

@@ -6,7 +6,7 @@ const Pagination = ({ usersPerPage, totalusers, paginate, data, num }) => {
   for (let i = 1; i <= Math.ceil(totalusers / usersPerPage); i++) {
     pageNumbers.push(i);
   }
-  console.log("length", num.length);
+
   return (
     <div style={{ float: "right", position: "relative", marginRight: "242px" }}>
       <nav>
@@ -19,11 +19,11 @@ const Pagination = ({ usersPerPage, totalusers, paginate, data, num }) => {
               onClick={() => paginate(data - 1)}
               style={{
                 alignContent: "center",
-                marginLeft: "130%",
+
                 fontSize: "1vw",
               }}
-              className="btn btn-primary btn-block"
-              disabled={data === 1 ? true : false}
+              className="btn btn-primary"
+              disabled={num.length < 5 || data === 1 ? true : false}
             >
               Prev
             </button>
@@ -32,8 +32,10 @@ const Pagination = ({ usersPerPage, totalusers, paginate, data, num }) => {
             <button
               onClick={() => paginate(data + 1)}
               style={{ marginLeft: "130%", fontSize: "1vw" }}
-              className="btn btn-primary btn-block"
-              disabled={num.length < 5 ? true : false}
+              className="btn btn-primary "
+              disabled={
+                num.length < 5 || data === pageNumbers.length ? true : false
+              }
             >
               Next
             </button>
