@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Left from "./components/Left";
+import Left from "./components/ContactList";
 import Pagination from "./components/Pagination";
-import Right from "./components/Right";
+import ContactDetails from "./components/ContactDetails";
 import "./style.css";
 import { Contact } from "./components/contact_list";
 
 function App() {
   const [contact, setContact] = useState(Contact);
-  const [dumy, setDumy] = useState(Contact);
+  const [masterData, setDumy] = useState(Contact);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchoutput, setsearchoutput] = useState("");
+  const [searchOutput, setsearchoutput] = useState("");
   const [usersPerPage, setUsersPerPage] = useState(5);
   const [output, setOutput] = useState([]);
-  const [display, setDisplay] = useState();
+  const [currentCard, setCurrentCard] = useState();
 
   function select(e) {
     var item = contact.filter((data) => {
@@ -22,12 +22,12 @@ function App() {
       }
     });
 
-    setDisplay(...item);
+    setCurrentCard(...item);
   }
 
   function update(e) {
     var data_id;
-    var item = dumy.filter((data, id) => {
+    var item = masterData.filter((data, id) => {
       if (
         data["E-mail Address"]
           .toLowerCase()
@@ -37,7 +37,7 @@ function App() {
         return data;
       }
     });
-    var temp = [...dumy];
+    var temp = [...masterData];
     temp[data_id] = { ...e };
     //  temp[id] = { ...e };
 
@@ -45,31 +45,31 @@ function App() {
     setDumy([...temp]);
   }
 
-  var currentUser;
-  var indexOfLastPost;
-  var indexOfFirstPost;
+  let currentUser;
+  let indexOfLastPost;
+  let indexOfFirstPost;
 
   useEffect(() => {
-    if (searchoutput.length === 0) {
-      return setContact([...dumy]);
+    if (searchOutput.length === 0) {
+      return setContact([...masterData]);
     }
-    var item = contact.filter((data) => {
-      if (searchoutput.length === 0) {
-        return setContact([...dumy]);
+    let item = contact.filter((data) => {
+      if (searchOutput.length === 0) {
+        return setContact([...masterData]);
       } else if (
-        data["First Name"].toLowerCase().includes(searchoutput.toLowerCase()) ||
-        data["Country"].toLowerCase().includes(searchoutput.toLowerCase()) ||
-        data["Home Phone"].toLowerCase().includes(searchoutput.toLowerCase())
+        data["First Name"].toLowerCase().includes(searchOutput.toLowerCase()) ||
+        data["Country"].toLowerCase().includes(searchOutput.toLowerCase()) ||
+        data["Home Phone"].toLowerCase().includes(searchOutput.toLowerCase())
       ) {
         return data;
       }
     });
 
     setCurrentPage(1);
-    var temp = [...item];
+    let temp = [...item];
     setContact([...temp]);
     setCurrentPage(1);
-  }, [searchoutput]);
+  }, [searchOutput]);
 
   indexOfLastPost = currentPage * usersPerPage;
   indexOfFirstPost = indexOfLastPost - usersPerPage;
@@ -146,9 +146,9 @@ function App() {
             marginTop: "10%",
           }}
         >
-          {display === undefined ? null : (
-            <Right
-              data={display}
+          {currentCard === undefined ? null : (
+            <ContactDetails
+              data={currentCard}
               update={(e) => {
                 update(e);
               }}
